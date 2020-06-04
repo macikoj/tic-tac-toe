@@ -45,8 +45,6 @@ public class moltiplayerBoard extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
-        textViewPlayerScore = findViewById(R.id.textViewPlayerScore);
-        textViewEnemyScore = findViewById(R.id.textViewEnemyScore);
 
         for(int i=0;i<10;i++){
             for(int j=0;j<10;j++){
