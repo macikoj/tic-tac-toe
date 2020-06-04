@@ -30,5 +30,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void startGameMultiplayer(View view) {
+        Intent intent = new Intent(this, moltiplayerBoard.class);
+        startActivity(intent);
+
+    }
 
 }

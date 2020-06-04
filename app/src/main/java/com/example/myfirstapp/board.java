@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import java.net.Socket;
+
 public class board extends AppCompatActivity implements View.OnClickListener {
 
     private Button[][] buttons =new Button[10][10];
@@ -56,7 +58,7 @@ public class board extends AppCompatActivity implements View.OnClickListener {
         if(checkForWin(Character.getNumericValue(idAsArray[idAsArray.length - 2]), Character.getNumericValue(idAsArray[idAsArray.length - 1]))){
         addVictory();
 
-        showVictoryToast();
+//        showVictoryToast();
             resetBoard();
         }else{
             player1Turn= !player1Turn;
@@ -84,10 +86,9 @@ public class board extends AppCompatActivity implements View.OnClickListener {
         }
         player1Turn=true;
     }
-    public void showVictoryToast(){
-        if(player1Turn)Toast.makeText(this,"Zyciężył gracz numer 1",Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this,"Zyciężył gracz numer 2    ",Toast.LENGTH_SHORT).show();;
-    }
+//    public void showVictoryToast(){Zyciężył gracz numer 1",Toast.LENGTH_SHORT).show();
+//        else Toast.makeText(this,"Zyciężył gracz numer 2    ",Toast.LENGTH_SHORT).show();;
+//    }
     public boolean checkForWin (int x, int y) {
         return (checkForWinUpAndDown(x,y)||checkForWinLeftAndRight(x,y)||
                 checkForWinTopLeftAndDownRight(x,y)||checkForWinTopRightAndDownLeft(x,y));
@@ -104,6 +105,7 @@ public class board extends AppCompatActivity implements View.OnClickListener {
                     goDown = true;
                     i = 1;
                     repeatTimes--;
+
                 } else{
                     i++;
                 }

@@ -6,8 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.net.Socket;
+
 public class DisplayMessageActivity extends AppCompatActivity {
 
+    private Socket socket;
+
+    private static final int SERVERPORT = 5555;
+    private static final String SERVER_IP = "192.168.245.187";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -46,4 +46,16 @@
         android:text="Zacznij grę"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginTop="200dp"
+        android:onClick="startGameMultiplayer"
+        android:text="Zacznij grę multiplayer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
