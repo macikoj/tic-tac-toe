@@ -1,8 +1,11 @@
 package com.example.myfirstapp;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,6 +17,8 @@ public class board extends AppCompatActivity implements View.OnClickListener {
 
     private Button[][] buttons =new Button[10][10];
     private boolean player1Turn=true;
+    private int count=0;
+    private int moves=0;
 
     private int playerScore;
     private int enemyScore;
@@ -42,7 +47,7 @@ public class board extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void onClick(View v) {
@@ -62,18 +67,46 @@ public class board extends AppCompatActivity implements View.OnClickListener {
             resetBoard();
         }else{
             player1Turn= !player1Turn;
+            moves++;
+            if(moves==100){
+                resetBoard();
+            }
 
         }
 
     }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
     public void addVictory(){
         if(player1Turn) {
-            playerScore+=1;
-            textViewPlayerScore.setText(Integer.toString(playerScore));
+            if(count%2==0){
+                playerScore+=1;
+                textViewPlayerScore.setText(Integer.toString(playerScore));
+            }
+            else{
+                enemyScore+=1;
+                textViewEnemyScore.setText(Integer.toString(enemyScore));
+            }
         }
         else{
-            enemyScore+=1;
-            textViewEnemyScore.setText(Integer.toString(enemyScore));
+            if(playerScore%2==1) {
+                enemyScore += 1;
+                textViewEnemyScore.setText(Integer.toString(enemyScore));
+            }else{
+                playerScore+=1;
+                textViewPlayerScore.setText(Integer.toString(playerScore));
+            }
         }
 
     }
@@ -84,11 +117,11 @@ public class board extends AppCompatActivity implements View.OnClickListener {
 
             }
         }
+        moves=0;
         player1Turn=true;
+        count++;
     }
-//    public void showVictoryToast(){Zyciężył gracz numer 1",Toast.LENGTH_SHORT).show();
-//        else Toast.makeText(this,"Zyciężył gracz numer 2    ",Toast.LENGTH_SHORT).show();;
-//    }
+
     public boolean checkForWin (int x, int y) {
         return (checkForWinUpAndDown(x,y)||checkForWinLeftAndRight(x,y)||
                 checkForWinTopLeftAndDownRight(x,y)||checkForWinTopRightAndDownLeft(x,y));

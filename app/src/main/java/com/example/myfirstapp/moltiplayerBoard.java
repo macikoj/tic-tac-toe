@@ -29,12 +29,15 @@ public class moltiplayerBoard extends AppCompatActivity implements View.OnClickL
     int playerType; // 0 to X, 1 to O
     int x;
     int y;
+    int moves=0;
     private int playerScore;
     private int enemyScore;
     boolean madeMove=false;
+    boolean jufstfinished=false;
 
-    private static final int SERVERPORT = 5555;
-    private static final String SERVER_IP = "192.168.245.187";
+    private static final int SERVERPORT = 5553;
+    private static final String SERVER_IP = "13.48.204.168";
+//    private static final String SERVER_IP ="192.168.245.187";
     private TextView textViewPlayerScore;
     private TextView textViewEnemyScore;
 
@@ -43,8 +46,9 @@ public class moltiplayerBoard extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board);
-
+        setContentView(R.layout.activity_moltiplayer_board);
+        textViewPlayerScore = findViewById(R.id.textViewPlayerScore);
+        textViewEnemyScore = findViewById(R.id.textViewEnemyScore);
 
         for(int i=0;i<10;i++){
             for(int j=0;j<10;j++){
@@ -103,15 +107,28 @@ public class moltiplayerBoard extends AppCompatActivity implements View.OnClickL
                                     public void run() {
                                         if(playerType==0)button.setText("O");
                                         else button.setText("X"); ;
+                                        moves++;
                                         if (checkForWin(Integer.valueOf(responserParted[1]), Integer.valueOf(responserParted[2]))) {
                                             addEnemyVictory();
                                             resetBoard();
+                                            jufstfinished=true;
+
 
 
                                         }
+                                        if(moves==100){
+                                            resetBoard();
+                                            jufstfinished=true;
+                                        }
                                     }
                                 });
-
+                                Thread.sleep(100);
+                                if(jufstfinished){
+                                    jufstfinished=false;
+                                    player1Turn=true;
+                                    System.out.println("cos");
+                                    continue;
+                                }
                                 player1Turn = !player1Turn;
                             }
                         }
@@ -176,9 +193,26 @@ public class moltiplayerBoard extends AppCompatActivity implements View.OnClickL
             }
         }
         player1Turn=true;
+        moves=0;
         if(playerType==0)playerType=1;
         else playerType=0;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //    public void showVictoryToast(){Zyciężył gracz numer 1",Toast.LENGTH_SHORT).show();
 //        else Toast.makeText(this,"Zyciężył gracz numer 2    ",Toast.LENGTH_SHORT).show();;
 //    }

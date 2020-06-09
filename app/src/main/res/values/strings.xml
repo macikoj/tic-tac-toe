@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">my firs tapp</string>
+    <string name="app_name">tic-tac-toe</string>
     <string name="edit_message">my firs tapp</string>
     <string name="player_score_info">Ty:</string>
     <string name="opponent_score_info">Przeciwnik:</string>
